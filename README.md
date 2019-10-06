@@ -54,7 +54,16 @@ Print out how many non-whitespace characters are in `myString`:
 Iterate through the array below. For each sentence, print out how many non-whitespace characters are in it.
 
 `let myFavoriteQuotes = ["To be or not to be, that is the question.", "The only source of knowledge is experience.", "Mr. Gorbachev, tear down this wall!", "Four score and twenty years ago..."]`
-
+```swift
+for (index , char) in myString.enumerated() {
+var localCount = 0
+if char == "\u{0020}" {
+localCount -= 1
+}
+print("My string has \(myString.count - localCount) characters without counting the spaces.")
+break
+}
+```
 
 ## Question 5
 
@@ -63,6 +72,31 @@ Iterate through `garden` and place any 🌷 that you find into the `basket`. Rep
 ```swift
 var garden = ["dirt","🌷","dirt","🌷","dirt","dirt","🌷","dirt","🌷","dirt"]
 var basket = [String]()
+
+Answer:
+var garden = ["dirt","🌷","dirt","🌷","dirt","dirt","🌷","dirt","🌷","dirt"]
+var basket = [String]()
+var flowerlessGarden = [String]()
+
+for str in garden {
+    if str == "🌷" {
+    basket.append("🌷")
+    }
+    print("The basket has \(basket.count) flowers in it.")
+}
+for (index, str) in garden.enumerated() {
+    if str == "dirt" {
+    flowerlessGarden.append("dirt")
+    }
+    if str == "🌷" {
+        flowerlessGarden.append("dirt")
+        garden.removeAll()
+    }
+print("the flowerless garden \(flowerlessGarden)")
+}
+garden += flowerlessGarden
+print("This is our garden\(garden)")
+
 ```
 
 ## Question 6
@@ -75,7 +109,19 @@ The below array represents an unfinished batting lineup for a baseball team. **Y
 - Put "Reyes" to bat 8th instead.
 
 `var battingLineup = ["Reyes", "Jeter", "Ramirez", "Pujols","Griffey","Thomas","Jones", "Rodriguez"]`
+Answer:
+```swift
+var battingLineup = ["Reyes", "Jeter", "Ramirez", "Pujols","Griffey","Thomas","Jones", "Rodriguez"]
+battingLineup.append("Suzuki")
 
+battingLineup[1] = "Tejada"
+
+battingLineup[5] = "Guerrero"
+
+battingLineup.remove(at: 0)
+battingLineup.insert("Reyes", at: 7)
+print("The final batting line up is \(battingLineup)")
+```
 
 ## Question 7
 
@@ -109,8 +155,18 @@ target = 3
 
 //false
 ```
-
-
+Answer: 
+```swift
+for (index , num) in numbers.enumerated(){
+    if num == 32 {
+        print("This array has the target number")
+        break
+    } else {
+        print("This array does not have the target number")
+        break
+    }
+}
+```
 ## Question 8
 
 Find the largest value in an array of Int.  Do not use the built-in `max()` method.
@@ -120,7 +176,17 @@ let arrayOfNumbers: [Int] = (1...100).map{ _ in Int.random(in: 0...200)}.map{Int
 
 //This creates an array of 100 numbers in between 0 and 200.  For now, you don't need to worry about how it does that.
 ```
-
+Answer:
+```swift
+for num in arrayOfNumbers {
+    if num >= 150{
+        print("\(num) is the highest number in this array")
+        break
+    } else {
+        print("not the highest")
+    }
+}
+```
 
 ## Question 9
 
@@ -131,28 +197,58 @@ let arrayOfNumbers: [Int] = (1...100).map{ _ in Int.random(in: 0...200)}.map{Int
 
 //This creates an array of 100 numbers in between 0 and 200.  For now, you don't need to worry about how it does that.
 ```
-
+Answer:
+```swift
+for num in arrayOfNumbers2 {
+    if num < 10 {
+        print("\(num) is the lowest number")
+        break
+    }else{
+        print("not the smallest")
+    }
+}
+```
 
 ## Question 10
 
 Iterate through `secondListOfNumbers`, and print out all the odd numbers.
 
 `var secondListOfNumbers = [19,13,14,19,101,10000,141,404]`
-
+Answer:
+```swift
+for num in secondListOfNumbers where num % 2 == 1 {
+    print(num)
+}
+```
 
 ## Question 11
 
 Iterate through `thirdListOfNumbers`, and print out the sum.
 
 `var thirdListOfNumbers = [11, 26, 49, 61, 25, 40, 74, 3, 22, 23]`
-
+Answer:
+```swift
+let sum = thirdListOfNumbers.reduce(0, +)
+print(sum)
+```
 
 ## Question 12
 
 Iterate through `thirdListOfNumbers`, and print out the sum of all the even numbers.
 
 `var thirdListOfNumbers = [11, 26, 49, 61, 25, 40, 74, 3, 22, 23]`
+Answer:
+```swift
+var evenNumbers = [Int]()
 
+for num in thirdListOfNumbers {
+    if num % 2 == 0 {
+    evenNumbers.append(num)
+        }
+}
+var evenNumberSum = evenNumbers.reduce(0, +)
+print(evenNumberSum)
+```
 
 ## Question 13
 
@@ -163,7 +259,17 @@ var listOne = [28, 64, 7, 96, 13, 32, 94, 11, 80, 68]
 var listTwo = [18, 94, 48, 6, 42, 68, 79, 76, 13, 7]
 var sharedElements = [Int]()
 ```
-
+Answer:
+```swift
+for num in listOne{
+    for number in listTwo {
+        if num == number {
+            sharedElements.append(num)
+        }
+        print("Lists one and two share \(sharedElements.count) of the same elements")
+}
+}
+```
 # Part 2
 
 ## Question 1
